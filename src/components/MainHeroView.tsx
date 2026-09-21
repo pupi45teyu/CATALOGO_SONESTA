@@ -103,56 +103,65 @@ export const MainHeroView: React.FC<MainHeroViewProps> = ({
         - Bottom status bar with Lake Titicaca sanctuary info
         ========================================================================
       */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-6 w-full flex-1 flex flex-col justify-between">
-        {/* Top: Header Titles pushed UP towards the top */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-6 w-full flex-1 flex flex-col justify-between">
+        {/* Top: Header Titles with high contrast and luxury typography */}
         <div className="pt-1 sm:pt-2 text-center">
-          <div className="inline-flex items-center justify-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-[#8ce5c5] drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
-            <span className="w-8 sm:w-14 h-[1px] bg-gradient-to-r from-transparent to-[#2ee59d]"></span>
-            <span>{lang === 'es' ? 'Catálogo Biológico de Alta Montaña' : 'High-Altitude Biodiversity Guide'}</span>
-            <span className="w-8 sm:w-14 h-[1px] bg-gradient-to-l from-transparent to-[#2ee59d]"></span>
+          <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-amber-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+            <span className="w-8 sm:w-14 h-[1.5px] bg-gradient-to-r from-transparent to-amber-400"></span>
+            <span className="font-bold tracking-widest">{lang === 'es' ? 'Sonesta Posadas del Inca Puno' : 'Sonesta Posadas del Inca Puno'}</span>
+            <span className="w-8 sm:w-14 h-[1.5px] bg-gradient-to-l from-transparent to-amber-400"></span>
           </div>
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-sans font-black text-white tracking-tight leading-none uppercase drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] text-center mt-1">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-sans font-black text-white tracking-tight leading-none uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] drop-shadow-[0_2px_6px_rgba(0,0,0,1)] text-center mt-1.5">
             TITICACA
           </h1>
-          <p className="font-serif italic text-base sm:text-xl text-[#d4f6ea] font-medium tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] text-center mt-1">
-            {lang === 'es' ? 'Guía Oficial de Fauna Silvestre & Flora Sagrada' : 'Official Guide to Native Wildlife & Sacred Flora'}
-          </p>
+          <div className="inline-flex items-center justify-center gap-2 mt-1.5 px-4 py-1 rounded-full bg-black/45 backdrop-blur-md border border-amber-400/30 shadow-lg">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <p className="font-serif italic text-sm sm:text-lg text-amber-100 font-medium tracking-wide drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] text-center">
+              {lang === 'es' ? 'Guía Oficial de Fauna Silvestre & Flora Sagrada' : 'Official Guide to Native Wildlife & Sacred Flora'}
+            </p>
+          </div>
         </div>
 
         {/* Bottom Elements: Distributed to the EXTREMES (Left & Right), keeping center open for background */}
         <div className="w-full flex flex-col md:flex-row items-stretch md:items-end justify-between gap-6 mt-auto pt-6">
-          {/* Left Extreme: Welcome / Sanctuary description with high transparency */}
-          <div className="w-full md:max-w-md lg:max-w-lg bg-black/35 hover:bg-black/45 backdrop-blur-md rounded-2xl p-4 sm:p-5 border-l-3 border-[#2ee59d] border-y border-r border-white/15 shadow-2xl transition-all duration-300">
-            <p className="text-xs sm:text-sm text-[#f0fbf7] leading-relaxed font-light drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] text-justify">
+          {/* Left Extreme: Welcome / Sanctuary description with high-end glassmorphism & contrast */}
+          <div className="w-full md:max-w-md lg:max-w-lg bg-black/60 hover:bg-black/70 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border-l-4 border-amber-400 border-y border-r border-white/20 shadow-2xl shadow-black/80 transition-all duration-300">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+              <span className="text-[11px] font-bold uppercase tracking-widest text-amber-300">
+                {lang === 'es' ? 'Santuario Ecológico Bahía de Puno' : 'Puno Bay Ecological Sanctuary'}
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-[#f5fbf8] leading-relaxed font-normal drop-shadow-[0_1px_4px_rgba(0,0,0,0.95)] text-justify">
               {lang === 'es'
                 ? 'Bienvenido al santuario natural de Sonesta Posadas del Inca a orillas de la Bahía de Puno. Una guía interactiva creada para explorar en detalle tanto nuestra fauna silvestre (aves emblemáticas, mamíferos y peces nativos) como la ancestral flora altoandina (árboles sagrados, plantas medicinales y totorales). Seleccione una categoría para iniciar su recorrido.'
                 : 'Welcome to the natural sanctuary of Sonesta Posadas del Inca on the shores of Puno Bay. An interactive field guide created to explore in detail both our native wildlife (iconic waterbirds, mammals, and lake fish) and the ancestral high-Andean flora (sacred trees, medicinal herbs, and living totora reeds). Select a category to begin your journey.'}
             </p>
           </div>
 
-          {/* Right Extreme: Category Selector card with high transparency */}
+          {/* Right Extreme: Category Selector card with warm sunset amber & emerald styling */}
           <div
             id="hero-filters-card"
-            className="w-full md:w-[350px] lg:w-[380px] bg-black/35 hover:bg-black/45 border border-[#2ee59d]/50 hover:border-[#2ee59d]/80 rounded-2xl p-4 sm:p-4.5 backdrop-blur-md shadow-2xl shadow-black/80 transition-all duration-300 ring-1 ring-white/15 text-left"
+            className="w-full md:w-[360px] lg:w-[390px] bg-black/60 hover:bg-black/70 border border-amber-400/40 hover:border-amber-400/80 rounded-2xl p-4 sm:p-4.5 backdrop-blur-xl shadow-2xl shadow-black/90 transition-all duration-300 ring-1 ring-white/20 text-left"
           >
             {/* Header: Clean status bar with pulse dot and species count */}
-            <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-white/15">
+            <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-white/20">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2ee59d] opacity-90"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2ee59d]"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-90"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400"></span>
                 </span>
-                <span className="text-[11px] uppercase font-bold tracking-widest text-[#d6f7ec] drop-shadow">
+                <span className="text-[11px] uppercase font-bold tracking-widest text-amber-100 drop-shadow">
                   {lang === 'es' ? 'Seleccione para Explorar' : 'Select to Explore'}
                 </span>
               </div>
-              <span className="text-[10px] text-[#8ce5c5] font-semibold bg-black/40 px-2.5 py-0.5 rounded-full border border-[#2ee59d]/30">
+              <span className="text-[10px] text-amber-200 font-bold bg-amber-500/20 px-2.5 py-0.5 rounded-full border border-amber-400/40">
                 {faunaCount + floraCount} {lang === 'es' ? 'especies' : 'species'}
               </span>
             </div>
 
             {/* Modern Segmented Controller: Seamless tab switch */}
-            <div className="p-1 bg-black/45 rounded-xl border border-white/15 grid grid-cols-2 gap-1.5 shadow-inner">
+            <div className="p-1 bg-black/55 rounded-xl border border-white/20 grid grid-cols-2 gap-1.5 shadow-inner">
               {/* Fauna Tab */}
               <button
                 type="button"
@@ -167,16 +176,16 @@ export const MainHeroView: React.FC<MainHeroViewProps> = ({
                 }}
                 className={`py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   selectedCategory === 'fauna'
-                    ? 'bg-gradient-to-r from-[#2ee59d] to-[#1fc985] text-[#07241d] font-bold shadow-lg shadow-[#2ee59d]/30 scale-[1.02]'
-                    : 'text-white hover:bg-white/15 font-medium'
+                    ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-stone-950 font-black shadow-lg shadow-amber-500/35 scale-[1.02]'
+                    : 'text-white/90 hover:bg-white/15 font-semibold'
                 }`}
               >
-                <PawPrint className={`w-4 h-4 ${selectedCategory === 'fauna' ? 'text-[#07241d]' : 'text-[#2ee59d]'}`} />
+                <PawPrint className={`w-4 h-4 ${selectedCategory === 'fauna' ? 'text-stone-950' : 'text-amber-400'}`} />
                 <span className="text-xs uppercase font-bold tracking-wide">
                   {lang === 'es' ? 'Fauna' : 'Fauna'}
                 </span>
                 <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${
-                  selectedCategory === 'fauna' ? 'bg-[#07241d]/20 text-[#07241d]' : 'bg-white/20 text-[#8ce5c5]'
+                  selectedCategory === 'fauna' ? 'bg-black/25 text-stone-950 font-black' : 'bg-white/20 text-amber-200'
                 }`}>
                   {faunaCount}
                 </span>
@@ -189,16 +198,16 @@ export const MainHeroView: React.FC<MainHeroViewProps> = ({
                 onClick={() => setSelectedCategory(selectedCategory === 'flora' ? null : 'flora')}
                 className={`py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   selectedCategory === 'flora'
-                    ? 'bg-gradient-to-r from-[#2ee59d] to-[#1fc985] text-[#07241d] font-bold shadow-lg shadow-[#2ee59d]/30 scale-[1.02]'
-                    : 'text-white hover:bg-white/15 font-medium'
+                    ? 'bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 text-stone-950 font-black shadow-lg shadow-emerald-500/35 scale-[1.02]'
+                    : 'text-white/90 hover:bg-white/15 font-semibold'
                 }`}
               >
-                <Flower2 className={`w-4 h-4 ${selectedCategory === 'flora' ? 'text-[#07241d]' : 'text-[#2ee59d]'}`} />
+                <Flower2 className={`w-4 h-4 ${selectedCategory === 'flora' ? 'text-stone-950' : 'text-emerald-400'}`} />
                 <span className="text-xs uppercase font-bold tracking-wide">
                   {lang === 'es' ? 'Flora' : 'Flora'}
                 </span>
                 <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded-md ${
-                  selectedCategory === 'flora' ? 'bg-[#07241d]/20 text-[#07241d]' : 'bg-white/20 text-[#8ce5c5]'
+                  selectedCategory === 'flora' ? 'bg-black/25 text-stone-950 font-black' : 'bg-white/20 text-emerald-200'
                 }`}>
                   {floraCount}
                 </span>
@@ -206,12 +215,12 @@ export const MainHeroView: React.FC<MainHeroViewProps> = ({
             </div>
 
             {/* Active selection helper / quick cue */}
-            <div className="mt-2.5 flex items-center justify-between text-[11px] text-[#9ce8ce]">
+            <div className="mt-2.5 flex items-center justify-between text-[11px] text-amber-200/90">
               {selectedCategory ? (
                 <>
-                  <span className="flex items-center gap-1.5">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#2ee59d]"></span>
-                    <span>{lang === 'es' ? 'Mostrando:' : 'Showing:'} <strong className="text-white uppercase">{selectedCategory}</strong></span>
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span>{lang === 'es' ? 'Explorando:' : 'Exploring:'} <strong className="text-white uppercase font-bold">{selectedCategory}</strong></span>
                   </span>
                   <button
                     type="button"
@@ -219,14 +228,14 @@ export const MainHeroView: React.FC<MainHeroViewProps> = ({
                       setSelectedCategory(null);
                       setFaunaSubfilter('all');
                     }}
-                    className="text-[#3de7a3] hover:text-white underline cursor-pointer text-[10px]"
+                    className="text-amber-300 hover:text-white underline cursor-pointer text-[10px] font-semibold"
                   >
                     {lang === 'es' ? 'Cerrar catálogo' : 'Close catalog'}
                   </button>
                 </>
               ) : (
-                <span className="text-[10px] text-[#8ce5c5]/90 italic flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-[#2ee59d]" />
+                <span className="text-[10px] text-amber-200/90 italic flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-amber-400" />
                   <span>{lang === 'es' ? 'Toque Fauna o Flora para desplegar el catálogo' : 'Click Fauna or Flora to open catalog'}</span>
                 </span>
               )}
