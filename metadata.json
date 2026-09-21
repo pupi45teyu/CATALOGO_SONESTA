@@ -1,0 +1,8 @@
+{
+  "name": "Remix Fauna del Lago Titicaca - Sonesta Posadas del Inca Puno",
+  "description": "Catálogo interactivo bilingüe de la fauna nativa y flora altoandina de Puno para huéspedes y visitantes de Sonesta Posadas del Inca Puno. Con fichas botánicas detalladas, fotografías y usos tradicionales.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   CINEMATIC 2D VECTOR ANIMATIONS - LAKE TITICACA SANCTUARY
+   - Pure 2D flat vector, solid clean silhouettes (no morphing, no 3D)
+   - Adult wild cuy: fixed gaze toward horizon, subtle & occasional ear twitch
+   - Baby wild cuy: continuous subtle head grazing/eating motion (up & down)
+   - Tall totoras: gentle, serene sway in light Andean breeze
+   - Fixed camera, seamless infinite loop
+   ========================================================================= */
+
+@keyframes swayTotoraGentleLeft {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+@keyframes swayTotoraGentleLeftAlt {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(2.2deg);
+  }
+}
+
+@keyframes swayTotoraGentleRight {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1.6deg);
+  }
+}
+
+@keyframes swayMidgroundReeds {
+  0%, 100% {
+    transform: skewX(0deg);
+  }
+  50% {
+    transform: skewX(-1.2deg);
+  }
+}
+
+/* Adult wild cuy ear: Occasional, very subtle twitch while body & head gaze at horizon */
+@keyframes adultCuyEarTwitch {
+  0%, 34%, 44%, 74%, 82%, 100% {
+    transform: rotate(0deg);
+  }
+  37% {
+    transform: rotate(-6.5deg);
+  }
+  39% {
+    transform: rotate(3deg);
+  }
+  41% {
+    transform: rotate(-2deg);
+  }
+  76% {
+    transform: rotate(-5deg);
+  }
+  78% {
+    transform: rotate(2.5deg);
+  }
+  80% {
+    transform: rotate(-1deg);
+  }
+}
+
+/* Baby wild cuy: Continuous subtle head grazing and eating motion */
+@keyframes babyCuyGrazeEat {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  24% {
+    transform: rotate(6.5deg) translateY(2.2px);
+  }
+  44% {
+    transform: rotate(2deg) translateY(0.7px);
+  }
+  68% {
+    transform: rotate(7.5deg) translateY(2.5px);
+  }
+  86% {
+    transform: rotate(1.5deg) translateY(0.4px);
+  }
+}
+
+@keyframes lakeRippleGentle {
+  0%, 100% {
+    transform: scaleY(1) translateY(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scaleY(1.02) translateY(1.2px);
+    opacity: 0.95;
+  }
+}
+
+@keyframes waterReflectionsDrift {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(14px);
+  }
+}
+
+@keyframes softCloudsDrift {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+.animate-totora-left {
+  transform-origin: 90px 850px;
+  animation: swayTotoraGentleLeft 8s ease-in-out infinite;
+}
+
+.animate-totora-left-alt {
+  transform-origin: 120px 860px;
+  animation: swayTotoraGentleLeftAlt 7.2s ease-in-out infinite;
+}
+
+.animate-totora-right {
+  transform-origin: 1350px 860px;
+  animation: swayTotoraGentleRight 7.6s ease-in-out infinite;
+}
+
+.animate-reeds-mid {
+  transform-origin: bottom center;
+  animation: swayMidgroundReeds 6s ease-in-out infinite;
+}
+
+.animate-adult-cuy-ear {
+  transform-origin: 526px 665px;
+  animation: adultCuyEarTwitch 7.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.animate-baby-cuy-head {
+  transform-origin: 626px 715px;
+  animation: babyCuyGrazeEat 3.6s ease-in-out infinite;
+}
+
+.animate-lake-water {
+  animation: lakeRippleGentle 8s ease-in-out infinite;
+}
+
+.animate-reflections {
+  animation: waterReflectionsDrift 11s ease-in-out infinite;
+}
+
+.animate-clouds {
+  animation: softCloudsDrift 32s ease-in-out infinite;
+}
+
