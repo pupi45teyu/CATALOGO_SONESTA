@@ -103,20 +103,20 @@ export const MainHeroView: React.FC<MainHeroViewProps> = ({
         - Bottom status bar with Lake Titicaca sanctuary info
         ========================================================================
       */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-6 w-full flex-1 flex flex-col justify-between">
-        {/* Top: Header Titles with high contrast and luxury typography */}
-        <div className="pt-1 sm:pt-2 text-center">
-          <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] text-amber-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-            <span className="w-8 sm:w-14 h-[1.5px] bg-gradient-to-r from-transparent to-amber-400"></span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-1 sm:pt-3 pb-4 sm:pb-6 w-full flex-1 flex flex-col justify-between">
+        {/* Top: Header Titles with high contrast and luxury typography in the sky area */}
+        <div className="pt-0.5 sm:pt-1 text-center">
+          <div className="inline-flex items-center justify-center gap-2 sm:gap-2.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-amber-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+            <span className="w-6 sm:w-10 h-[1.5px] bg-gradient-to-r from-transparent to-amber-400"></span>
             <span className="font-bold tracking-widest">{lang === 'es' ? 'Sonesta Posadas del Inca Puno' : 'Sonesta Posadas del Inca Puno'}</span>
-            <span className="w-8 sm:w-14 h-[1.5px] bg-gradient-to-l from-transparent to-amber-400"></span>
+            <span className="w-6 sm:w-10 h-[1.5px] bg-gradient-to-l from-transparent to-amber-400"></span>
           </div>
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-sans font-black text-white tracking-tight leading-none uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] drop-shadow-[0_2px_6px_rgba(0,0,0,1)] text-center mt-1.5">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black text-white tracking-tight leading-none uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] drop-shadow-[0_2px_6px_rgba(0,0,0,1)] text-center mt-1">
             TITICACA
           </h1>
-          <div className="inline-flex items-center justify-center gap-2 mt-1.5 px-4 py-1 rounded-full bg-black/45 backdrop-blur-md border border-amber-400/30 shadow-lg">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <p className="font-serif italic text-sm sm:text-lg text-amber-100 font-medium tracking-wide drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] text-center">
+          <div className="inline-flex items-center justify-center gap-2 mt-1 px-3.5 py-0.5 rounded-full bg-black/45 backdrop-blur-md border border-amber-400/30 shadow-lg">
+            <Sparkles className="w-3 h-3 text-amber-300" />
+            <p className="font-serif italic text-xs sm:text-sm text-amber-100 font-medium tracking-wide drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] text-center">
               {lang === 'es' ? 'Guía Oficial de Fauna Silvestre & Flora Sagrada' : 'Official Guide to Native Wildlife & Sacred Flora'}
             </p>
           </div>
