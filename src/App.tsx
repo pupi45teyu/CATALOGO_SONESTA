@@ -17,6 +17,18 @@ const SIGHTINGS_STORAGE_KEY = 'sonesta_titicaca_sightings_v1';
 const PHOTOS_STORAGE_KEY = 'sonesta_titicaca_photos_v1';
 const LANG_STORAGE_KEY = 'sonesta_titicaca_lang_v1';
 
+// Helper to extract species ID from URL query parameters (?species=... or ?especie=... or ?id=...)
+const getSpeciesFromQuery = (): string | null => {
+  if (typeof window === 'undefined') return null;
+  const params = new URLSearchParams(window.location.search);
+  const target = params.get('species') || params.get('especie') || params.get('id');
+  if (!target) return null;
+  const found = FAUNA_DATA.find(
+    (s) => s.id.toLowerCase() === target.toLowerCase() || s.slug?.toLowerCase() === target.toLowerCase()
+  );
+  return found ? found.id : null;
+};
+
 export default function App() {
   // Language state (defaulting to Spanish as requested, but with instant English toggle)
   const [lang, setLang] = useState<Language>(() => {
@@ -29,10 +41,22 @@ export default function App() {
     return 'es';
   });
 
-  // Navigation View
-  const [activeView, setActiveView] = useState<'catalog' | 'detail' | 'hotel-guide' | 'sightings'>('catalog');
-  const [selectedSpeciesId, setSelectedSpeciesId] = useState<string>('zambullidor-titicaca');
-  const [activeCategoryModal, setActiveCategoryModal] = useState<'fauna' | 'flora' | null>(null);
+  const initialSpeciesFromUrl = getSpeciesFromQuery();
+
+  // Navigation View (deep linking: opens directly to detail view if URL has ?species=...)
+  const [activeView, setActiveView] = useState<'catalog' | 'detail' | 'hotel-guide' | 'sightings'>(() => {
+    return initialSpeciesFromUrl ? 'detail' : 'catalog';
+  });
+  const [selectedSpeciesId, setSelectedSpeciesId] = useState<string>(() => {
+    return initialSpeciesFromUrl || 'zambullidor-titicaca';
+  });
+  const [activeCategoryModal, setActiveCategoryModal] = useState<'fauna' | 'flora' | null>(() => {
+    if (initialSpeciesFromUrl) {
+      const sp = FAUNA_DATA.find((s) => s.id === initialSpeciesFromUrl);
+      return sp?.category === 'flora' ? 'flora' : 'fauna';
+    }
+    return null;
+  });
 
   // Guest Sightings state
   const [sightings, setSightings] = useState<GuestSighting[]>(() => {
@@ -105,10 +129,45 @@ export default function App() {
     }
   }, [customPhotos]);
 
-  // Scroll to top on navigation change
+  // Listen to browser navigation (back / forward buttons)
+  useEffect(() => {
+    const handlePopState = () => {
+      const targetId = getSpeciesFromQuery();
+      if (targetId) {
+        const sp = FAUNA_DATA.find((s) => s.id === targetId);
+        if (sp) {
+          setSelectedSpeciesId(sp.id);
+          setActiveCategoryModal(sp.category === 'flora' ? 'flora' : 'fauna');
+          setActiveView('detail');
+          return;
+        }
+      }
+      // If back to root without species query param
+      setActiveView((prev) => (prev === 'detail' ? 'catalog' : prev));
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Scroll to top on navigation change and manage URL query parameter
   const navigateTo = (view: 'catalog' | 'detail' | 'hotel-guide' | 'sightings') => {
     setActiveView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (view !== 'detail') {
+      try {
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('species') || url.searchParams.has('especie') || url.searchParams.has('id')) {
+          url.searchParams.delete('species');
+          url.searchParams.delete('especie');
+          url.searchParams.delete('id');
+          window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+        }
+      } catch {
+        // ignore
+      }
+    }
   };
 
   const handleSelectSpecies = (speciesId: string) => {
@@ -119,7 +178,19 @@ export default function App() {
       setActiveCategoryModal('fauna');
     }
     setSelectedSpeciesId(speciesId);
-    navigateTo('detail');
+    setActiveView('detail');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update browser URL so it can be directly copied or shared
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('species', speciesId);
+      url.searchParams.delete('especie');
+      url.searchParams.delete('id');
+      window.history.pushState({ speciesId }, '', url.toString());
+    } catch {
+      // ignore
+    }
   };
 
   const handleBackToFilter = () => {
@@ -129,7 +200,19 @@ export default function App() {
     } else {
       setActiveCategoryModal('fauna');
     }
-    navigateTo('catalog');
+    setActiveView('catalog');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Clean URL query param when returning to catalog
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('species');
+      url.searchParams.delete('especie');
+      url.searchParams.delete('id');
+      window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+    } catch {
+      // ignore
+    }
   };
 
   // Sighting toggle

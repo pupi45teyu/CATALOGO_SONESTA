@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Species, Language, CustomUploadedPhoto } from '../types';
+import { SpeciesShareModal } from './SpeciesShareModal';
 import {
   ChevronLeft,
   ChevronRight,
   Share2,
+  QrCode,
   Sparkles,
   Camera,
   Layers,
@@ -42,7 +44,7 @@ export const SpeciesDetailView: React.FC<SpeciesDetailViewProps> = ({
   const [activeTab, setActiveTab] = useState<'overview' | 'habitat' | 'behavior'>('overview');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [copiedShare, setCopiedShare] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   // Reset image when species changes
   useEffect(() => {
@@ -61,14 +63,6 @@ export const SpeciesDetailView: React.FC<SpeciesDetailViewProps> = ({
   ];
 
   const currentImg = allImages[currentImageIndex] || species.images[0];
-
-  const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedShare(true);
-      setTimeout(() => setCopiedShare(false), 2500);
-    }
-  };
 
   return (
     <article id="species-detail-page" className="bg-stone-100 text-stone-900 pb-20 min-h-screen">
@@ -94,12 +88,14 @@ export const SpeciesDetailView: React.FC<SpeciesDetailViewProps> = ({
 
           <div className="flex items-center gap-2">
             <button
-              onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 transition-colors"
-              title="Compartir ficha"
+              onClick={() => setShareModalOpen(true)}
+              id="species-share-qr-button"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-emerald-950 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 transition-all cursor-pointer shadow-xs hover:shadow"
+              title={lang === 'es' ? 'Compartir ficha y generar código QR' : 'Share guide and generate QR code'}
             >
-              <Share2 className="w-3.5 h-3.5" />
-              <span>{copiedShare ? (lang === 'es' ? '¡Enlace copiado!' : 'Copied!') : (lang === 'es' ? 'Compartir' : 'Share')}</span>
+              <Share2 className="w-4 h-4 text-emerald-700" />
+              <QrCode className="w-4 h-4 text-emerald-700" />
+              <span>{lang === 'es' ? 'Compartir & QR' : 'Share & QR'}</span>
             </button>
           </div>
         </div>
@@ -562,6 +558,14 @@ export const SpeciesDetailView: React.FC<SpeciesDetailViewProps> = ({
           </div>
         </div>
       )}
+
+      {/* Share & QR Code Modal */}
+      <SpeciesShareModal
+        isOpen={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+        species={species}
+        lang={lang}
+      />
     </article>
   );
 };
